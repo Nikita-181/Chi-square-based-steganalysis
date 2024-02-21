@@ -1,0 +1,108 @@
+return function(expected, observed){
+		return 1 - cumulativeProbability(chiSquare(expected, observed), expected.length - 1);
+	};
+
+function chiSquare(expected, observed) {
+
+		if (expected.length < 2) {
+			throw "Dimension mismatch";
+		}
+
+		if (expected.length != observed.length) {
+			throw "Dimension not equal";
+		}
+
+		checkPositive(expected);
+		checkNonNegative(observed);
+
+		var sumExpected = 0,
+			sumObserved = 0,
+			i;
+
+		for (i = 0; i < observed.length; i++) {
+			sumExpected += expected[i];
+			sumObserved += observed[i];
+		}
+		var ratio = 1,
+			rescale = false;
+
+		if (Math.abs(sumExpected - sumObserved) > 10E-6) {
+			ratio = sumObserved / sumExpected;
+			rescale = true;
+		}
+
+		var sumSq = 0, dev;
+		for (i = 0; i < observed.length; i++) {
+			if (rescale) {
+				dev = observed[i] - ratio * expected[i];
+				sumSq += dev * dev / (ratio * expected[i]);
+			} else {
+				dev = observed[i] - expected[i];
+				sumSq += dev * dev / expected[i];
+			}
+		}
+
+		return sumSq;
+	}
+
+function cumulativeProbability(x, degreesOfFreedom) {
+		if (x <= 0) {
+			return 0;
+		}
+
+		return regularizedGammaP(degreesOfFreedom / 2, x / 2);
+	}
+
+function regularizedGammaP(a, x) {
+		return _regularizedGammaP(a, x, DEFAULT_EPSILON, Math.pow(2, 32) - 1);
+	}
+
+function _regularizedGammaP(a, x, epsilon, maxIterations) {
+		if (isNaN(a) || isNaN(x) || a <= 0 || x < 0) {
+			return NaN;
+		}
+
+		if (x === 0) {
+			return 0;
+		}
+
+		if (x >= a + 1) {
+			// use regularizedGammaQ because it should converge faster in this case.
+			return 1.0 - _regularizedGammaQ(a, x, epsilon, maxIterations);
+		}
+
+		// calculate series
+		var n = 0,      // current element index
+			an = 1 / a, // n-th element in the series
+			sum = an;   // partial sum
+
+		while (Math.abs(an/sum) > epsilon && n < maxIterations && sum < Infinity) {
+			// compute next element in the series
+			n = n + 1.0;
+			an = an * (x / (a + n));
+
+			// update partial sum
+			sum = sum + an;
+		}
+
+		if (!isFinite(sum)) {
+			return 1;
+		}
+
+		return Math.exp(-x + (a * Math.log(x)) - logGamma(a)) * sum;
+	}
+function logGamma(x) {
+		var i, tmp, sum;
+
+		if (isNaN(x) || (x <= 0)) {	
+			return NaN;
+		}
+
+		sum = LANCZOS[0];
+		for (i = 1; i < LANCZOS.length; i++) {
+			sum += (LANCZOS[i] / (x + i));
+		}
+
+		tmp = x + 0.5 + (607 / 128);
+		return ((x + 0.5) * Math.log(tmp)) - tmp + HALF_LOG_2_PI + Math.log(sum / x);
+	}

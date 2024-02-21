@@ -1,0 +1,7 @@
+https://habr.com/ru/articles/422593/
+
+//Оригинальная статья:
+https://web.archive.org/web/20151123010933/http://users.ece.cmu.edu/~adrian/487-s06/westfeld-pfitzmann-ihw99.pdf
+
+//Хорошее пояснение на русском
+https://github.com/desudesutalk/lsbtools/blob/master/docs/lsb_rus.md
