@@ -12,7 +12,7 @@ The degree of similarity of the observed sample distribution and the theoretical
 
 The image is analyzed line by line, increasing the analyzed area by one line for each step in the cycle.
 
-**NOTE**: Original article: ["Attacks on Steganographic Systems. Breaking the Steganographic Utilities EzStego, Jsteg, Steganos, and S-Tools and Some Lessons Learned"](https://web.archive.org/web/20151123010933/http://users.ece.cmu.edu/~adrian/487-s06/westfeld-pfitzmann-ihw99.pdf)
+**Original article:** ["Attacks on Steganographic Systems. Breaking the Steganographic Utilities EzStego, Jsteg, Steganos, and S-Tools and Some Lessons Learned"](https://web.archive.org/web/20151123010933/http://users.ece.cmu.edu/~adrian/487-s06/westfeld-pfitzmann-ihw99.pdf)
 
 ## Libraries used
 ScottPlot.WPF Version: 4.1.69

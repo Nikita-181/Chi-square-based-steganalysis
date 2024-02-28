@@ -16,7 +16,7 @@
 
 Анализ изображение идет построчно, увеличивая анализируемую область на одну строку за каждый шаг цикла.
 
-**NOTE**: Оригинальная статья: ["Attacks on Steganographic Systems. Breaking the Steganographic Utilities EzStego, Jsteg, Steganos, and S-Tools and Some Lessons Learned"](https://web.archive.org/web/20151123010933/http://users.ece.cmu.edu/~adrian/487-s06/westfeld-pfitzmann-ihw99.pdf)
+**Оригинальная статья:**  ["Attacks on Steganographic Systems. Breaking the Steganographic Utilities EzStego, Jsteg, Steganos, and S-Tools and Some Lessons Learned"](https://web.archive.org/web/20151123010933/http://users.ece.cmu.edu/~adrian/487-s06/westfeld-pfitzmann-ihw99.pdf)
 
 ## Используемые библиотеки
 ScottPlot.WPF Версия: 4.1.69
