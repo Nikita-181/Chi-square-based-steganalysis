@@ -2,6 +2,7 @@
 
 This C# solution implements the method of statistical steganalysis based on Chi-square statistics analysis, also known as "Chi-square Attack".
 
+![interface](interface.png)
 ## Brief description of the method
 The essence of the method is that if the bits used to rewrite the low-order bits are equally distributed, the frequencies of both values of each pair (PoV, Pair of Values) 0011010**0** and 0011010**1** become equal.
 
